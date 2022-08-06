@@ -30,7 +30,7 @@ public class ControllerUser {
         }
     }*/
 
-    @GetMapping(path = "product")
+    @GetMapping(path = "user")
     public String example(){
         return "Hello World!!";
     }
