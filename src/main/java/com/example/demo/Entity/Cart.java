@@ -26,22 +26,22 @@ public class Cart {
     @Basic
     @Column(name = "cupon_id", insertable = false,updatable = false)
     private Integer cuponId;
-    // @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    // @JsonBackReference
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private User user;
-    // @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    // @JsonBackReference
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "methodBuy_id", referencedColumnName = "id", nullable = false)
     private MethodBuy methodBuy;
-    // @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    // @JsonBackReference
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "cupon_id", referencedColumnName = "id")
     private Coupon coupon;
-    // @JsonBackReference
+    @JsonBackReference
     @OneToMany(mappedBy = "cart")
     private Collection<ItemCart> itemCarts;
 
