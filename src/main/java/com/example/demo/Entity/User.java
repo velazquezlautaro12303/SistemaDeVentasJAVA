@@ -1,6 +1,7 @@
 package com.example.demo.Entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -21,6 +22,7 @@ public class User {
     @Basic
     @Column(name = "password")
     private String password;
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @JsonManagedReference
     @OneToMany(mappedBy = "user")
     private Collection<Cart> carts;

@@ -1,5 +1,8 @@
 package com.example.demo.Entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -16,6 +19,8 @@ public class Coupon {
     @Basic
     @Column(name = "available")
     private Boolean available;
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonManagedReference
     @OneToMany(mappedBy = "coupon")
     private Collection<Cart> carts;
 

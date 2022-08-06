@@ -1,5 +1,8 @@
 package com.example.demo.Entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -13,6 +16,8 @@ public class Category {
     @Basic
     @Column(name = "nameCategory")
     private String nameCategory;
+    @JsonManagedReference
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @OneToMany(mappedBy = "category")
     private Collection<Product> products;
 
