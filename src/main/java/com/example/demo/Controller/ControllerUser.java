@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
-@Controller
-@RequestMapping(path = "user")
+@ RestController
+@RequestMapping(path = "/user")
 public class ControllerUser {
 
     @Autowired
