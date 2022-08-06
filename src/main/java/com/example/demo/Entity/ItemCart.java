@@ -22,13 +22,13 @@ public class ItemCart {
     @Basic
     @Column(name = "cart_id", insertable = false,updatable = false)
     private Integer cartId;
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @JsonBackReference
+    // @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    // @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName = "id", nullable = false)
     private Product product;
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @JsonManagedReference
+    // @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    // @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "cart_id", referencedColumnName = "id", nullable = false)
     private Cart cart;

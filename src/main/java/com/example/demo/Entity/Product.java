@@ -29,17 +29,17 @@ public class Product {
     @Basic
     @Column(name = "stock")
     private Integer stock;
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @JsonManagedReference
+    // @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    // @JsonManagedReference
     @OneToMany(mappedBy = "product")
     private Collection<ItemCart> itemCarts;
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @JsonBackReference
+    // @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    // @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "brand_id", referencedColumnName = "id", nullable = false)
     private Brand brand;
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @JsonBackReference
+    // @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    // @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false)
     private Category category;

@@ -21,7 +21,7 @@ public class User {
     @Basic
     @Column(name = "password")
     private String password;
-    @JsonManagedReference
+    // @JsonManagedReference
     @OneToMany(mappedBy = "user")
     private Collection<Cart> carts;
 
