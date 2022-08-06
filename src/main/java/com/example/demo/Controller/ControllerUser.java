@@ -14,7 +14,6 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping(path = "user")
-@CrossOrigin
 public class ControllerUser {
 
     @Autowired
@@ -27,18 +26,18 @@ public class ControllerUser {
         return this.user.findAll(page);
     }
 
-    @DeleteMapping(path = "user/{id}")
-    public @ResponseBody ResponseEntity<User> updateUser(@PathVariable("id") Integer id){
-        Optional<User> userOptional = this.user.findById(id);
-        if (userOptional.isPresent()){
-            User user = userOptional.get();
-            user.setAvailable(Boolean.FALSE);
-            this.user.save(user);
-            return ResponseEntity.ok(user);
-        }
-        else{
-            return ResponseEntity.notFound().build();
-        }
-    }
+//    @DeleteMapping(path = "user/{id}")
+//    public @ResponseBody ResponseEntity<User> updateUser(@PathVariable("id") Integer id){
+//        Optional<User> userOptional = this.user.findById(id);
+//        if (userOptional.isPresent()){
+//            User user = userOptional.get();
+//            user.setAvailable(Boolean.FALSE);
+//            this.user.save(user);
+//            return ResponseEntity.ok(user);
+//        }
+//        else{
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
 
 }

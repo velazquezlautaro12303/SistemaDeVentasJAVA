@@ -8,8 +8,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-@RepositoryRestResource(path = "product")
-@CrossOrigin
 public interface RepoProduct extends PagingAndSortingRepository<Product,Integer> {
 
     public Page<Product> findAllByNameProductContaining(String search, Pageable page);
