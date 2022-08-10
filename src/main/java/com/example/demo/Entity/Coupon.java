@@ -1,5 +1,6 @@
 package com.example.demo.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
@@ -22,6 +23,7 @@ public class Coupon {
     @Basic
     @Column(name = "discount", nullable = false)
     private Integer discount;
+    @JsonBackReference
     @OneToMany(mappedBy = "coupon")
     private Collection<Cart> carts;
 

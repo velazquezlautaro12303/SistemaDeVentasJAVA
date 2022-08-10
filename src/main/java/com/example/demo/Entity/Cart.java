@@ -44,7 +44,7 @@ public class Cart {
     @JoinColumn(name = "methodBuy_id", referencedColumnName = "id", nullable = false)
     private MethodBuy methodBuy;
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @JsonBackReference
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "cupon_id", referencedColumnName = "id")
     private Coupon coupon;

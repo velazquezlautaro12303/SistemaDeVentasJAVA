@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RepositoryRestController
+@RequestMapping(path = "")
 @CrossOrigin
 public class ControllerCart {
 
@@ -31,7 +33,7 @@ public class ControllerCart {
 
     @CrossOrigin
     @PostMapping("/cart")
-    public void createCart(@RequestBody Cart cart){
+    public @ResponseBody ResponseEntity<Cart> createCart(@RequestBody Cart cart){
         if ( this.repoUser.existsById(cart.getUserId()) ) {
             User user = this.repoUser.findById(cart.getUserId()).get();
             cart.setUser(user);
@@ -56,6 +58,8 @@ public class ControllerCart {
 
         cart.setTotal((int) this.total);
         this.repoCart.save(cart);
+
+        return ResponseEntity.ok().build();
     }
 
 }
