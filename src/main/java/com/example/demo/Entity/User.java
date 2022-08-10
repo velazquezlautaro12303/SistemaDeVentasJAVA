@@ -1,7 +1,9 @@
 package com.example.demo.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -14,16 +16,16 @@ public class User {
     @Column(name = "id")
     private Integer id;
     @Basic
-    @Column(name = "nameUser")
+    @Column(name = "nameUser", nullable = false)
     private String nameUser;
     @Basic
+    @ColumnDefault("true")
     @Column(name = "available")
     private Boolean available;
     @Basic
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @JsonManagedReference
+    @JsonBackReference
     @OneToMany(mappedBy = "user")
     private Collection<Cart> carts;
 

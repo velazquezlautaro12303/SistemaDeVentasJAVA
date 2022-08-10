@@ -14,13 +14,13 @@ public class ItemCart {
     @Column(name = "id")
     private Integer id;
     @Basic
-    @Column(name = "product_id", insertable = false,updatable = false)
+    @Column(name = "product_id", insertable = false,updatable = false, nullable = false)
     private Integer productId;
     @Basic
-    @Column(name = "cant")
+    @Column(name = "cant", nullable = false)
     private Integer cant;
     @Basic
-    @Column(name = "cart_id", insertable = false,updatable = false)
+    @Column(name = "cart_id", insertable = false,updatable = false, nullable = false)
     private Integer cartId;
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @JsonBackReference

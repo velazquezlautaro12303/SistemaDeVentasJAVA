@@ -1,6 +1,7 @@
 package com.example.demo.Repository;
 
 import com.example.demo.Entity.Product;
+import com.example.demo.View.ProductView;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -8,6 +9,8 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
+@RepositoryRestResource(path = "product", excerptProjection = ProductView.class)
+@CrossOrigin
 public interface RepoProduct extends PagingAndSortingRepository<Product,Integer> {
 
     public Page<Product> findAllByNameProductContaining(String search, Pageable page);

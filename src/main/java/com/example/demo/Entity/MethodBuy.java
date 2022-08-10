@@ -1,5 +1,8 @@
 package com.example.demo.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -11,8 +14,9 @@ public class MethodBuy {
     @Column(name = "id")
     private Integer id;
     @Basic
-    @Column(name = "nameMethod")
+    @Column(name = "nameMethod", nullable = false)
     private String nameMethod;
+    @JsonManagedReference
     @OneToMany(mappedBy = "methodBuy")
     private Collection<Cart> carts;
 

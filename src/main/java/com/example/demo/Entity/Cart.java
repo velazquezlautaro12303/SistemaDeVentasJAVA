@@ -1,10 +1,13 @@
 package com.example.demo.Entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 @Entity
@@ -15,17 +18,21 @@ public class Cart {
     @Column(name = "id")
     private Integer id;
     @Basic
-    @Column(name = "user_id", insertable = false,updatable = false)
+    @Column(name = "user_id", insertable = false,updatable = false, nullable = false)
     private Integer userId;
     @Basic
-    @Column(name = "methodBuy_id", insertable = false,updatable = false)
+    @Column(name = "methodBuy_id", insertable = false,updatable = false, nullable = false)
     private Integer methodBuyId;
     @Basic
+    @CreationTimestamp
     @Column(name = "date")
-    private Timestamp date;
+    private LocalDateTime date;
+    @Basic
+    @Column(name = "total")
+    private Integer total;
     @Basic
     @Column(name = "cupon_id", insertable = false,updatable = false)
-    private Integer cuponId;
+    private Integer couponId;
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @JsonBackReference
     @ManyToOne
@@ -44,6 +51,14 @@ public class Cart {
     @JsonBackReference
     @OneToMany(mappedBy = "cart")
     private Collection<ItemCart> itemCarts;
+
+    public Integer getTotal() {
+        return total;
+    }
+
+    public void setTotal(Integer total) {
+        this.total = total;
+    }
 
     public Integer getId() {
         return id;
@@ -69,20 +84,20 @@ public class Cart {
         this.methodBuyId = methodBuyId;
     }
 
-    public Timestamp getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Timestamp date) {
+    /* public void setDate(Timestamp date) {
         this.date = date;
+    }*/
+
+    public Integer getCouponId() {
+        return couponId;
     }
 
-    public Integer getCuponId() {
-        return cuponId;
-    }
-
-    public void setCuponId(Integer cuponId) {
-        this.cuponId = cuponId;
+    public void setCuponId(Integer couponId) {
+        this.couponId = couponId;
     }
 
     @Override
@@ -96,7 +111,7 @@ public class Cart {
         if (userId != null ? !userId.equals(cart.userId) : cart.userId != null) return false;
         if (methodBuyId != null ? !methodBuyId.equals(cart.methodBuyId) : cart.methodBuyId != null) return false;
         if (date != null ? !date.equals(cart.date) : cart.date != null) return false;
-        if (cuponId != null ? !cuponId.equals(cart.cuponId) : cart.cuponId != null) return false;
+        if (couponId != null ? !couponId.equals(cart.couponId) : cart.couponId != null) return false;
 
         return true;
     }
@@ -107,7 +122,7 @@ public class Cart {
         result = 31 * result + (userId != null ? userId.hashCode() : 0);
         result = 31 * result + (methodBuyId != null ? methodBuyId.hashCode() : 0);
         result = 31 * result + (date != null ? date.hashCode() : 0);
-        result = 31 * result + (cuponId != null ? cuponId.hashCode() : 0);
+        result = 31 * result + (couponId != null ? couponId.hashCode() : 0);
         return result;
     }
 
@@ -136,10 +151,11 @@ public class Cart {
     }
 
     public Collection<ItemCart> getItemCarts() {
-        return itemCarts;
+        return this.itemCarts;
     }
 
     public void setItemCarts(Collection<ItemCart> itemCarts) {
         this.itemCarts = itemCarts;
     }
+
 }

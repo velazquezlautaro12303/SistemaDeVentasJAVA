@@ -1,8 +1,5 @@
 package com.example.demo.Entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -14,11 +11,17 @@ public class Brand {
     @Column(name = "id")
     private Integer id;
     @Basic
-    @Column(name = "nameBrand")
+    @Column(name = "nameBrand", nullable = false)
     private String nameBrand;
-    @JsonManagedReference
     @OneToMany(mappedBy = "brand")
     private Collection<Product> products;
+
+    @Transient
+    private Integer countProducts;
+
+    public Integer getCountProducts() {
+        return this.products.size();
+    }
 
     public Integer getId() {
         return id;

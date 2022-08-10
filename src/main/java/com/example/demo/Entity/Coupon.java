@@ -1,7 +1,6 @@
 package com.example.demo.Entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -14,13 +13,15 @@ public class Coupon {
     @Column(name = "id")
     private Integer id;
     @Basic
-    @Column(name = "codCoupon")
+    @Column(name = "codCoupon", nullable = false)
     private String codCoupon;
     @Basic
-    @Column(name = "available")
+    @ColumnDefault("true")
+    @Column(name = "available", nullable = false)
     private Boolean available;
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @JsonManagedReference
+    @Basic
+    @Column(name = "discount", nullable = false)
+    private Integer discount;
     @OneToMany(mappedBy = "coupon")
     private Collection<Cart> carts;
 
@@ -46,6 +47,14 @@ public class Coupon {
 
     public void setAvailable(Boolean available) {
         this.available = available;
+    }
+
+    public Integer getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Integer discount) {
+        this.discount = discount;
     }
 
     @Override

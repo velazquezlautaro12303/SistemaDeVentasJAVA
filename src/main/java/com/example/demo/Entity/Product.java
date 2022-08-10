@@ -15,22 +15,22 @@ public class Product {
     @Column(name = "id")
     private Integer id;
     @Basic
-    @Column(name = "nameProduct")
+    @Column(name = "nameProduct", nullable = false)
     private String nameProduct;
     @Basic
-    @Column(name = "price")
+    @Column(name = "price", nullable = false)
     private Double price;
     @Basic
-    @Column(name = "brand_id", insertable = false,updatable = false)
+    @Column(name = "brand_id", insertable = false,updatable = false, nullable = false)
     private Integer brandId;
     @Basic
-    @Column(name = "category_id", insertable = false,updatable = false)
+    @Column(name = "category_id", insertable = false,updatable = false, nullable = false)
     private Integer categoryId;
     @Basic
-    @Column(name = "stock")
+    @Column(name = "stock", nullable = false)
     private Integer stock;
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @JsonManagedReference
+    @JsonBackReference
     @OneToMany(mappedBy = "product")
     private Collection<ItemCart> itemCarts;
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
