@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 
 @Entity
-@Table(name = "Carts", schema = "SistemaVentas", catalog = "")
+@Table(name = "Carts")
 public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "ItemCarts", schema = "SistemaVentas", catalog = "")
+@Table(name = "ItemCarts")
 public class ItemCart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

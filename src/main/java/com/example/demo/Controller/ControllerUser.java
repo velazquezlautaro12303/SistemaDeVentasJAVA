@@ -17,7 +17,7 @@ public class ControllerUser {
     @Autowired
     private RepoUser repoUser;
 
-    @DeleteMapping(path = "auser/{id}")
+    @DeleteMapping(path = "user/{id}")
     public @ResponseBody ResponseEntity<User> updateUser(@PathVariable("id") Integer id){
         Optional<User> userOptional = this.repoUser.findById(id);
         if (userOptional.isPresent()){
@@ -31,7 +31,7 @@ public class ControllerUser {
         }
     }
 
-    @PostMapping(path = "alogin")
+    @PostMapping(path = "login")
     public @ResponseBody ResponseEntity<User> login(@RequestBody User user){
         User user1 = this.repoUser.getUserByNameUserAndPassword(user.getNameUser(), user.getPassword());
         if(user1 != null){

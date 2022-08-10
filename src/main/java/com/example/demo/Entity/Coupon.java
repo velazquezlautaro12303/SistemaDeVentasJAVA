@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Table(name = "Coupons", schema = "SistemaVentas", catalog = "")
+@Table(name = "Coupons")
 public class Coupon {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

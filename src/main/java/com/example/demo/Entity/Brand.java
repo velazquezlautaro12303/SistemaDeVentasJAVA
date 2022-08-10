@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Table(name = "Brands", schema = "SistemaVentas", catalog = "")
+@Table(name = "Brands")
 public class Brand {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
