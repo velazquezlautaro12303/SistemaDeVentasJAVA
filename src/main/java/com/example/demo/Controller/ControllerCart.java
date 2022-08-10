@@ -31,7 +31,7 @@ public class ControllerCart {
     private double total = 0;
 
     @CrossOrigin
-    @PostMapping("cart")
+    @PostMapping("carta")
     public @ResponseBody ResponseEntity<Cart> createCart(@RequestBody Cart cart){
         if ( this.repoUser.existsById(cart.getUserId()) ) {
             User user = this.repoUser.findById(cart.getUserId()).get();

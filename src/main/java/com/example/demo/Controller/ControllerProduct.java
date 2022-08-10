@@ -25,7 +25,7 @@ public class ControllerProduct {
     @Autowired
     private RepoCategory repoCategory;
 
-    @GetMapping("product")
+    @GetMapping("aproduct")
     public Page<Product> getUsers(
             Pageable pageable,
             @RequestParam(value = "category",required = false) String category,
@@ -67,7 +67,7 @@ public class ControllerProduct {
         return response;
     }
 
-    @DeleteMapping(path = "product/{id}")
+    @DeleteMapping(path = "aproduct/{id}")
     public @ResponseBody ResponseEntity<Product> deleteProduct(@PathVariable("id") Integer id){
         Optional<Product> product = repoProduct.findById(id);
         if (product.isPresent()){
@@ -80,7 +80,7 @@ public class ControllerProduct {
         }
     }
 
-    @PutMapping(path = "product/{id}")
+    @PutMapping(path = "aproduct/{id}")
     public @ResponseBody ResponseEntity<Product> updateProduct(@PathVariable("id") Integer id, @RequestBody Product p){
         Optional<Product> product = repoProduct.findById(id);
         if (product.isPresent()){
@@ -98,7 +98,7 @@ public class ControllerProduct {
         }
     }
 
-    @PostMapping(path = "product")
+    @PostMapping(path = "aproduct")
     public @ResponseBody ResponseEntity<Product> updateProduct(@RequestBody Product p){
         p.setBrand(repoBrand.findById(p.getBrandId()).get());
         p.setCategory(repoCategory.findById(p.getCategoryId()).get());
