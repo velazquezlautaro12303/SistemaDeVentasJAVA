@@ -6,7 +6,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-@RepositoryRestResource(path = "category", excerptProjection = CategoryView.class)
+@RepositoryRestResource(path = "/category", excerptProjection = CategoryView.class)
 @CrossOrigin
 public interface RepoCategory extends PagingAndSortingRepository<Category, Integer> {
 }
