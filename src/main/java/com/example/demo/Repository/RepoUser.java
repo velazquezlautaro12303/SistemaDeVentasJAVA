@@ -10,5 +10,5 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @RepositoryRestResource(path = "user", excerptProjection = UserView.class)
 @CrossOrigin
 public interface RepoUser extends PagingAndSortingRepository<User,Integer> {
-    public User getUserByNameUserAndPassword(String nameUser, String password);
+    public User getUserByNameUserAndPasswordAndAvailableTrue(String nameUser, String password);
 }

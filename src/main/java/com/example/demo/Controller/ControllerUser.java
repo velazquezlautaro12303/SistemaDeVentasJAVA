@@ -33,7 +33,7 @@ public class ControllerUser {
 
     @PostMapping(path = "login")
     public @ResponseBody ResponseEntity<User> login(@RequestBody User user){
-        User user1 = this.repoUser.getUserByNameUserAndPassword(user.getNameUser(), user.getPassword());
+        User user1 = this.repoUser.getUserByNameUserAndPasswordAndAvailableTrue(user.getNameUser(), user.getPassword());
         if(user1 != null){
             return ResponseEntity.ok(user1);
         }
