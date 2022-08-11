@@ -48,6 +48,8 @@ public class ControllerCart {
 
         this.repoCart.save(cart);
 
+        this.total = 0;
+
         cart.getItemCarts().stream().forEach(itemCart -> {
             itemCart.setCart(cart);
             itemCart.setProduct(repoProduct.findById(itemCart.getProductId()).get());
