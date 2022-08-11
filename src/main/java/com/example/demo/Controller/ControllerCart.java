@@ -1,9 +1,6 @@
 package com.example.demo.Controller;
 
-import com.example.demo.Entity.Cart;
-import com.example.demo.Entity.Coupon;
-import com.example.demo.Entity.MethodBuy;
-import com.example.demo.Entity.User;
+import com.example.demo.Entity.*;
 import com.example.demo.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -54,7 +51,12 @@ public class ControllerCart {
             itemCart.setCart(cart);
             itemCart.setProduct(repoProduct.findById(itemCart.getProductId()).get());
             repoItemCart.save(itemCart);
-            this.total = this.total + itemCart.getProduct().getPrice() * itemCart.getCant();
+            if (itemCart.getProduct().getStock() > 0){
+                this.total = this.total + itemCart.getProduct().getPrice() * itemCart.getCant();
+                Product p = itemCart.getProduct();
+                p.setStock(p.getStock() - itemCart.getCant());
+                repoProduct.save(p);
+            }
         });
 
         this.total = this.total - cart.getCoupon().getDiscount();

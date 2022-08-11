@@ -2,6 +2,7 @@ package com.example.demo.Repository;
 
 import com.example.demo.Entity.User;
 import com.example.demo.View.UserView;
+import org.springframework.data.domain.Page;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -11,4 +12,5 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @CrossOrigin
 public interface RepoUser extends PagingAndSortingRepository<User,Integer> {
     public User getUserByNameUserAndPasswordAndAvailableTrue(String nameUser, String password);
+    public UserView findUserById(Integer id);
 }

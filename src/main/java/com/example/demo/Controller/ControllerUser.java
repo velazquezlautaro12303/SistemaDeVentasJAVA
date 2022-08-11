@@ -2,15 +2,14 @@ package com.example.demo.Controller;
 
 import com.example.demo.Entity.User;
 import com.example.demo.Repository.RepoUser;
+import com.example.demo.View.UserView;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
-@Controller
+@RestController
 @CrossOrigin
 public class ControllerUser {
 
@@ -29,6 +28,20 @@ public class ControllerUser {
         else{
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping(path = "user/{id}")
+    public UserView getUser(@PathVariable("id") Integer id){
+        return repoUser.findUserById(id);
+    }
+
+    @PostMapping(path = "user/{id}")
+    public User updateUser(@PathVariable("id") Integer id, @RequestBody User user){
+        User user1 = repoUser.findById(id).get();
+        user1.setNameUser(user.getNameUser());
+        user1.setAvailable(user.getAvailable());
+        user1.setPassword(user.getPassword());
+        return repoUser.save(user1);
     }
 
     @PostMapping(path = "login")

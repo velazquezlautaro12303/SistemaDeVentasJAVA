@@ -34,35 +34,35 @@ public class ControllerProduct {
             @RequestParam(value = "minPrice", required = false) Double minPrice,
             @RequestParam(value = "maxPrice", required = false) Double maxPrice
     ){
-        Page<Product> response = repoProduct.findAll(pageable);
+        Page<Product> response = repoProduct.findAllByStockGreaterThan(pageable,0);
         if (nameProduct != null && brand == null && category == null && minPrice == null && maxPrice == null) {
-            response = repoProduct.findAllByNameProductContaining(nameProduct,pageable);
+            response = repoProduct.findAllByNameProductContainingAndStockGreaterThan(nameProduct,pageable,0);
         } else if (nameProduct == null && brand != null && category == null && minPrice == null && maxPrice == null) {
-            response = repoProduct.findAllByBrand_NameBrand(brand, pageable);
+            response = repoProduct.findAllByBrand_NameBrandAndStockGreaterThan(brand, pageable,0);
         } else if (nameProduct == null && brand == null && category != null && minPrice == null && maxPrice == null) {
-            response = repoProduct.findAllByCategory_NameCategory(category, pageable);
+            response = repoProduct.findAllByCategory_NameCategoryAndStockGreaterThan(category, pageable,0);
         } else if(nameProduct == null && brand != null & category != null && minPrice == null && maxPrice == null) {
-            response = repoProduct.findAllByBrand_NameBrandAndCategory_NameCategory(brand, category, pageable);
+            response = repoProduct.findAllByBrand_NameBrandAndCategory_NameCategoryAndStockGreaterThan(brand, category, pageable,0);
         } else if(nameProduct != null && brand != null & category == null && minPrice == null && maxPrice == null) {
-            response = repoProduct.findAllByNameProductContainingAndBrand_NameBrand(nameProduct, brand, pageable);
+            response = repoProduct.findAllByNameProductContainingAndBrand_NameBrandAndStockGreaterThan(nameProduct, brand, pageable,0);
         } else if(nameProduct != null && brand != null & category != null && minPrice == null && maxPrice == null) {
-            response = repoProduct.findAllByNameProductContainingAndCategory_NameCategoryAndBrand_NameBrand(nameProduct,category,brand, pageable);
+            response = repoProduct.findAllByNameProductContainingAndCategory_NameCategoryAndBrand_NameBrandAndStockGreaterThan(nameProduct,category,brand, pageable,0);
         } else if(nameProduct != null && brand == null & category != null && minPrice == null && maxPrice == null) {
-            response = repoProduct.findAllByNameProductContainingAndCategory_NameCategory(nameProduct, category, pageable);
+            response = repoProduct.findAllByNameProductContainingAndCategory_NameCategoryAndStockGreaterThan(nameProduct, category, pageable,0);
         } else if(nameProduct == null && brand == null & category == null && minPrice != null && maxPrice != null) {
-            response = repoProduct.findAllByPriceBetween(minPrice, maxPrice, pageable);
+            response = repoProduct.findAllByPriceBetweenAndStockGreaterThan(minPrice, maxPrice, pageable,0);
         } else if(nameProduct == null && brand != null & category == null && minPrice != null && maxPrice != null) {
-            response = repoProduct.findAllByBrand_NameBrandAndPriceBetween(brand, minPrice, maxPrice, pageable);
+            response = repoProduct.findAllByBrand_NameBrandAndPriceBetweenAndStockGreaterThan(brand, minPrice, maxPrice, pageable,0);
         } else if(nameProduct == null && brand != null & category != null && minPrice != null && maxPrice != null) {
-            response = repoProduct.findAllByBrand_NameBrandAndCategory_NameCategoryAndPriceBetween(brand, category, minPrice, maxPrice, pageable);
+            response = repoProduct.findAllByBrand_NameBrandAndCategory_NameCategoryAndPriceBetweenAndStockGreaterThan(brand, category, minPrice, maxPrice, pageable,0);
         } else if(nameProduct == null && brand == null & category != null && minPrice != null && maxPrice != null) {
-            response = repoProduct.findAllByCategory_NameCategoryAndPriceBetween(category, minPrice, maxPrice, pageable);
+            response = repoProduct.findAllByCategory_NameCategoryAndPriceBetweenAndStockGreaterThan(category, minPrice, maxPrice, pageable,0);
         } else if(nameProduct != null && brand != null & category == null && minPrice != null && maxPrice != null) {
-            response = repoProduct.findAllByNameProductContainingAndBrand_NameBrandAndPriceBetween(nameProduct, brand, minPrice, maxPrice, pageable);
+            response = repoProduct.findAllByNameProductContainingAndBrand_NameBrandAndPriceBetweenAndStockGreaterThan(nameProduct, brand, minPrice, maxPrice, pageable,0);
         } else if(nameProduct != null && brand == null & category != null && minPrice != null && maxPrice != null) {
-            response = repoProduct.findAllByNameProductContainingAndCategory_NameCategoryAndPriceBetween(nameProduct, category, minPrice, maxPrice, pageable);
+            response = repoProduct.findAllByNameProductContainingAndCategory_NameCategoryAndPriceBetweenAndStockGreaterThan(nameProduct, category, minPrice, maxPrice, pageable,0);
         } else if(nameProduct != null && brand != null & category != null && minPrice != null && maxPrice != null) {
-            response = repoProduct.findAllByNameProductContainingAndCategory_NameCategoryAndBrand_NameBrandAndPriceBetween(nameProduct, category, brand, minPrice, maxPrice, pageable);
+            response = repoProduct.findAllByNameProductContainingAndCategory_NameCategoryAndBrand_NameBrandAndPriceBetweenAndStockGreaterThan(nameProduct, category, brand, minPrice, maxPrice, pageable,0);
         }
         return response;
     }
@@ -80,7 +80,7 @@ public class ControllerProduct {
         }
     }
 
-    @PutMapping(path = "product/{id}")
+    @PostMapping(path = "product/{id}")
     public @ResponseBody ResponseEntity<Product> updateProduct(@PathVariable("id") Integer id, @RequestBody Product p){
         Optional<Product> product = repoProduct.findById(id);
         if (product.isPresent()){
@@ -99,12 +99,15 @@ public class ControllerProduct {
     }
 
     @PostMapping(path = "product")
-    public @ResponseBody ResponseEntity<Product> updateProduct(@RequestBody Product p){
+    public @ResponseBody ResponseEntity<Product> createProduct(@RequestBody Product p){
         p.setBrand(repoBrand.findById(p.getBrandId()).get());
         p.setCategory(repoCategory.findById(p.getCategoryId()).get());
         this.repoProduct.save(p);
         return ResponseEntity.ok(p);
     }
 
-
+    @GetMapping(path = "product/{id}")
+    Product getProduct(@PathVariable("id") Integer id){
+        return repoProduct.findById(id).get();
+    }
 }

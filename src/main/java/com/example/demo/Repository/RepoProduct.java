@@ -13,26 +13,27 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @CrossOrigin
 public interface RepoProduct extends PagingAndSortingRepository<Product,Integer> {
 
-    public Page<Product> findAllByNameProductContaining(String search, Pageable page);
-    public Page<Product> findAllByPriceBetween(Double minPrice, Double maxPrice, Pageable page);
-    public Page<Product> findAllByBrand_NameBrand(String nameBrand, Pageable page);
-    public Page<Product> findAllByCategory_NameCategory(String nameCategory, Pageable page);
+    public Page<Product> findAllByStockGreaterThan(Pageable page, Integer stock);
+    public Page<Product> findAllByNameProductContainingAndStockGreaterThan(String search, Pageable page, Integer stock);
+    public Page<Product> findAllByPriceBetweenAndStockGreaterThan(Double minPrice, Double maxPrice, Pageable page, Integer stock);
+    public Page<Product> findAllByBrand_NameBrandAndStockGreaterThan(String nameBrand, Pageable page, Integer stock);
+    public Page<Product> findAllByCategory_NameCategoryAndStockGreaterThan(String nameCategory, Pageable page, Integer stock);
 
-    public Page<Product> findAllByBrand_NameBrandAndPriceBetween(String nameBrand, Double minPrice, Double maxPrice, Pageable page);
+    public Page<Product> findAllByBrand_NameBrandAndPriceBetweenAndStockGreaterThan(String nameBrand, Double minPrice, Double maxPrice, Pageable page, Integer stock);
 
-    public Page<Product> findAllByCategory_NameCategoryAndPriceBetween(String nameCategory, Double minPrice, Double maxPrice, Pageable page);
+    public Page<Product> findAllByCategory_NameCategoryAndPriceBetweenAndStockGreaterThan(String nameCategory, Double minPrice, Double maxPrice, Pageable page, Integer stock);
 
-    public Page<Product> findAllByBrand_NameBrandAndCategory_NameCategory(String nameBrand,String nameCategory, Pageable page);
-    public Page<Product> findAllByBrand_NameBrandAndCategory_NameCategoryAndPriceBetween(String nameBrand,String nameCategory, Double minPrice, Double maxPrice, Pageable page);
+    public Page<Product> findAllByBrand_NameBrandAndCategory_NameCategoryAndStockGreaterThan(String nameBrand,String nameCategory, Pageable page, Integer stock);
+    public Page<Product> findAllByBrand_NameBrandAndCategory_NameCategoryAndPriceBetweenAndStockGreaterThan(String nameBrand,String nameCategory, Double minPrice, Double maxPrice, Pageable page, Integer stock);
 
-    public Page<Product> findAllByNameProductContainingAndBrand_NameBrand(String search, String nameBrand, Pageable page);
-    public Page<Product> findAllByNameProductContainingAndBrand_NameBrandAndPriceBetween(String search, String nameBrand, Double minPrice, Double maxPrice, Pageable page);
+    public Page<Product> findAllByNameProductContainingAndBrand_NameBrandAndStockGreaterThan(String search, String nameBrand, Pageable page, Integer stock);
+    public Page<Product> findAllByNameProductContainingAndBrand_NameBrandAndPriceBetweenAndStockGreaterThan(String search, String nameBrand, Double minPrice, Double maxPrice, Pageable page, Integer stock);
 
-    public Page<Product> findAllByNameProductContainingAndCategory_NameCategory(String search, String nameCategory, Pageable page);
-    public Page<Product> findAllByNameProductContainingAndCategory_NameCategoryAndPriceBetween(String search, String nameCategory, Double minPrice, Double maxPrice, Pageable page);
+    public Page<Product> findAllByNameProductContainingAndCategory_NameCategoryAndStockGreaterThan(String search, String nameCategory, Pageable page, Integer stock);
+    public Page<Product> findAllByNameProductContainingAndCategory_NameCategoryAndPriceBetweenAndStockGreaterThan(String search, String nameCategory, Double minPrice, Double maxPrice, Pageable page, Integer stock);
 
-    public Page<Product> findAllByNameProductContainingAndCategory_NameCategoryAndBrand_NameBrand(String search, String nameCategory, String nameBrand, Pageable page);
-    public Page<Product> findAllByNameProductContainingAndCategory_NameCategoryAndBrand_NameBrandAndPriceBetween(String search, String nameCategory, String nameBrand, Double minPrice, Double maxPrice, Pageable page);
+    public Page<Product> findAllByNameProductContainingAndCategory_NameCategoryAndBrand_NameBrandAndStockGreaterThan(String search, String nameCategory, String nameBrand, Pageable page, Integer stock);
+    public Page<Product> findAllByNameProductContainingAndCategory_NameCategoryAndBrand_NameBrandAndPriceBetweenAndStockGreaterThan(String search, String nameCategory, String nameBrand, Double minPrice, Double maxPrice, Pageable page, Integer stock);
 
     @Override
     @RestResource(exported = false)
