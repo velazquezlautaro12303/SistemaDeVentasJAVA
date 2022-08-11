@@ -9,4 +9,5 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @RepositoryRestResource(path = "cart", excerptProjection = CartView.class)
 @CrossOrigin
 public interface RepoCart extends PagingAndSortingRepository<Cart, Integer> {
+    public Cart getCartById(Integer id);
 }
