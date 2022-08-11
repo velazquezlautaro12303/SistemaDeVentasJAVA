@@ -16,7 +16,7 @@ public class MethodBuy {
     @Basic
     @Column(name = "nameMethod", nullable = false)
     private String nameMethod;
-    @JsonManagedReference
+    @JsonBackReference
     @OneToMany(mappedBy = "methodBuy")
     private Collection<Cart> carts;
 
