@@ -57,6 +57,8 @@ public class ControllerCart {
             this.total = this.total + itemCart.getProduct().getPrice() * itemCart.getCant();
         });
 
+        this.total = this.total - cart.getCoupon().getDiscount();
+
         cart.setTotal((int) this.total);
         this.repoCart.save(cart);
 
