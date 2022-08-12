@@ -4,6 +4,7 @@ import com.example.demo.Entity.Product;
 import com.example.demo.Repository.RepoBrand;
 import com.example.demo.Repository.RepoCategory;
 import com.example.demo.Repository.RepoProduct;
+import com.example.demo.Services.ServiceSpring;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,6 +25,8 @@ public class ControllerProduct {
     private RepoBrand repoBrand;
     @Autowired
     private RepoCategory repoCategory;
+    @Autowired
+    private ServiceSpring serviceSpring;
 
     @GetMapping("product")
     public Page<Product> getUsers(
@@ -64,6 +67,7 @@ public class ControllerProduct {
         } else if(nameProduct != null && brand != null & category != null && minPrice != null && maxPrice != null) {
             response = repoProduct.findAllByNameProductContainingAndCategory_NameCategoryAndBrand_NameBrandAndPriceBetweenAndStockGreaterThan(nameProduct, category, brand, minPrice, maxPrice, pageable,0);
         }
+        response.get().forEach(product -> product.setPriceAPI(this.serviceSpring.getCompra() * product.getPrice()));
         return response;
     }
 

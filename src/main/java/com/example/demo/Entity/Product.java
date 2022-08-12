@@ -1,15 +1,24 @@
 package com.example.demo.Entity;
 
+import com.example.demo.Services.API_DOLAR;
+import com.example.demo.Services.ServiceSpring;
+import com.example.demo.Services.ServicioGeoref;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import java.io.IOException;
 import java.util.Collection;
 
 @Entity
 @Table(name = "Products")
 public class Product {
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
@@ -43,6 +52,17 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false)
     private Category category;
+
+    @Transient
+    private Double priceAPI;
+
+    public Double getPriceAPI() {
+        return priceAPI;
+    }
+
+    public void setPriceAPI(Double priceAPI) {
+        this.priceAPI = priceAPI;
+    }
 
     public Integer getId() {
         return id;
